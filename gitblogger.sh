@@ -1,17 +1,35 @@
 #!/bin/sh
 #
-# new_entry.sh - new entry for my new "git blog"
+# gitblogger.sh  create new post for 'git blog'
 #                What this does is touch a file, add it, commit it and then
 #                the commit message is the blog post
 
 CTEMPLATE=/tmp/commit.$$.template
 export EDITOR=`which vi`
 
-git pull
-if [ $? -ne 0 ]
+DO_PULL=0
+
+if [ -f FILE ]
 then
-    echo "Failed git pull"
-    exit 1
+    DO_PULL=1
+else
+    echo "There's no FILE here, i.e. blog is empty. If you've updated it from elsewhere"
+    echo "then a git pull will update it here. If not, then git pull will fail"
+    read -p "Run git pull (y/N)" ans
+    if [ "$ans" = "y" ]
+    then
+        DO_PULL=1
+    fi
+fi
+
+if [ $DO_PULL -eq 1 ]
+then
+    git pull 
+    if [ $? -ne 0 ]
+    then
+        echo "Failed git pull"
+        exit 1
+    fi
 fi
 
 if [ ! -f FILE ]
@@ -27,7 +45,7 @@ echo $NUM > FILE
 echo "" > $CTEMPLATE
 echo "" >> $CTEMPLATE
 echo "($NUM)" >> $CTEMPLATE
-git add FILE new_entry.sh
+git add FILE $0
 git commit -t $CTEMPLATE
 
 if [ $? -eq 0 ]
