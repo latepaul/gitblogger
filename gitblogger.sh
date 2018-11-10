@@ -5,7 +5,33 @@
 #                the commit message is the blog post
 
 CTEMPLATE=/tmp/commit.$$.template
-export EDITOR=`which vi`
+
+SAVE_GE=$GIT_EDITOR
+VIM=`which vim`
+if [ ! -z "$VIM" ]
+then
+    export GIT_EDITOR=$VIM
+else
+    for EDTOR in $SAVE_GE $VISUAL $EDITOR vi nano NONE
+    do
+        if [ "$EDTOR" != "NONE" -a -n "`which $EDTOR`" ]
+        then
+            export GIT_EDITOR=$EDTOR
+            break
+        fi
+    done
+fi
+
+if [ "$EDTOR" = "NONE" ]
+then
+    echo "Couldn't find an editor! If you have one, try setting GIT_EDITOR"
+    exit 1
+fi
+
+if [ "`basename $GIT_EDITOR`" = "vim" ]
+then
+    export GIT_EDITOR="$GIT_EDITOR +start"
+fi
 
 DO_PULL=0
 
