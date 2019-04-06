@@ -12,12 +12,12 @@ To setup:
  
 1. Create an empty git repo somewhere, e.g. github
 2. Clone the repo to your local machine
-3. Copy new_entry.sh to the directory and git add it. Do not commit yet. 
+3. Copy gitblogger.sh to the directory and git add it. Do not commit yet. 
 
 To post:
 
-- sh new_entry.sh and enter your thoughts into the commit message. When you save it it will be committed and pushed to the central repo. 
-- new_entry.sh is added automatically with each commit. So if you update it any changes will get saved in the next 'post'. The idea is not to 'pollute' your blog with commits purely for code changes. 
+- sh gitblogger.sh and enter your thoughts into the commit message. When you save it it will be committed and pushed to the central repo. 
+- gitblogger.sh is added automatically with each commit. So if you update it any changes will get saved in the next 'post'. The idea is not to 'pollute' your blog with commits purely for code changes. 
 
 To read:
 
