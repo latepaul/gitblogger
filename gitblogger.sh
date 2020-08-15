@@ -6,6 +6,15 @@
 
 CTEMPLATE=/tmp/commit.$$.template
 
+THIS_SCRIPT=`readlink -m $0`
+THIS_DIR=`dirname $0`
+COMMIT_NON_BLOG_FILES=""
+cd $THIS_DIR
+for F in *.sh
+do
+    COMMIT_NON_BLOG_FILES="$COMMIT_NON_BLOG_FILES $F"
+done
+
 SAVE_GE=$GIT_EDITOR
 VIM=`which vim`
 if [ ! -z "$VIM" ]
@@ -71,7 +80,7 @@ echo $NUM > FILE
 echo "" > $CTEMPLATE
 echo "" >> $CTEMPLATE
 echo "($NUM)" >> $CTEMPLATE
-git add FILE $0
+git add FILE $COMMIT_NON_BLOG_FILES
 git commit -t $CTEMPLATE
 
 if [ $? -eq 0 ]

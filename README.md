@@ -23,6 +23,7 @@ To read:
 
 - if you're on a machine you've not used before then you can clone the repo. It needs to be able to run a simple bash script. Linux is great. WSL bash is fine. Then all you need is...
 - git log     
+- or 'sh readblog.sh' - main reason I added this was so you could read in reverse order (earliest first)
 - or if your central repo has a web interface, e.g. github, you could use that. For me personally that gets away from the minimalism that gitblogger is all about.
 
 That's it (told you it was pointless!)
